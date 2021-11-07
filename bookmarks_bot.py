@@ -76,7 +76,19 @@ def list_topic(update, context):
         update.message.reply_text('[ERROR] : There are no topics')
 
 def remove_topic(update, context):
-    update.message.reply_text('remove_topic')
+    try:
+        topic = context.args[0]
+    except (IndexError, ValueError):
+        update.message.reply_text('[ERROR] : There are no topic specified')
+
+    try:
+        if check_if_topic_exists(str(update.message.chat.id), topic):
+           remove_topic_by_id(str(update.message.chat.id), topic)
+           update.message.reply_text('[RESULT]: TOPIC WAS DELETED')
+        else:
+            update.message.reply_text('[RESULT]: NOTHING TO DELETE  ')
+    except (IndexError, ValueError):
+        update.message.reply_text('[ERROR] : ')
 
 #########################################################
 ##################### Bookmark ##########################

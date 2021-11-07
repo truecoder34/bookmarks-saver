@@ -106,9 +106,10 @@ def list_bookmarks_by_id_and_topic(id, topic):
 def remove_topic_by_id(id, topic):
     data_in=read()
     print('[DEBUG-storage_controller.remove_topic_by_id] - list ', data_in[id])
-    res = data_in.pop(topic, None)
+    res = data_in[id].pop(topic, None)
     if res != None:
         print('[DEBUG-storage_controller.remove_topic_by_id] - deleted  from storage ', res)
+        write(data_in)
     else:
         print('[DEBUG-storage_controller.remove_topic_by_id] - nothing to delete ')
     return data_in[id]
